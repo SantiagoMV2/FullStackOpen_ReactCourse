@@ -1,8 +1,8 @@
 ```mermaid
 sequenceDiagram
+    participant user
     participant browser
     participant server
-    participant user
 
     user->>browser: clicks "save" button
     browser-->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
