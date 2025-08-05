@@ -7,7 +7,7 @@ sequenceDiagram
     user->>browser: clicks "save" button
     browser-->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
-    server-->>browser: GET /notes 
+    server-->>browser: 302 redirect to notes
     deactivate server
 
     Note right of browser: Browser follows that reroute
