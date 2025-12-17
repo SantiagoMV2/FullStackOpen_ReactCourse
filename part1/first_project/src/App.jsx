@@ -1,94 +1,33 @@
-import { useState } from "react";
-
-const Button = ({handler, text}) => {
-  return(
-    <>
-      <button onClick = {handler}>
-        {text}
-      </button>
-    </>
-  )
-}
-
-const Statistics = (props) => {
-  if (props.total !== 0) {
-    return (
-      <>
-        <h1>statistics</h1>
-        <table>
-          <tbody>
-            <StatisticLine text={"good"} constant={props.good} />
-            <StatisticLine text={"neutral"} constant={props.neutral} />
-            <StatisticLine text={"bad"} constant={props.bad} />
-            <StatisticLine text={"all"} constant={props.total} />
-            <StatisticLine text={"average"} constant={props.average} />
-            <StatisticLine text={"positive"} constant={props.percentage + "%"} />
-          </tbody>
-        </table>
-      </>
-    );
-  } else {
-    return(
-    <p>No feedback given</p>
-    )
-  }
-};
-
-const StatisticLine = ({ text, constant }) => {
-  return (
-      <tr>
-        <td>{text}</td> 
-        <td>{constant}</td>
-      </tr>
-  );
-};
+import { useState } from 'react'
 
 const App = () => {
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
+  const anecdotes = [
+    'If it hurts, do it more often.',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
+    'The only way to go fast, is to go well.'
+  ]
 
-  const handleGood = () => {
-    const newGood = good + 1;
-    setGood(newGood);
-  };
+  const [selected, setSelected] = useState(Math.floor(Math.random() * anecdotes.length))
 
-  const handleNeutral = () => {
-    const newNeutral = neutral + 1;
-    setNeutral(newNeutral);
-  };
-
-  const handleBad = () => {
-    const newBad = bad + 1;
-    setBad(newBad);
-  };
-
-  const total = good + neutral + bad;
-  const average =
-    total === 0
-      ? "Total es igual a 0, oprime un boton para continuar"
-      : (good - bad) / total;
-  const percentage =
-    total === 0
-      ? "Total es igual a 0, oprime un boton para continuar"
-      : (good / total) * 100;
+  const handleText = () => {
+    const newNumber = Math.floor(Math.random() * anecdotes.length)
+    setSelected(newNumber)
+    return anecdotes[newNumber]
+  }
 
   return (
     <div>
-      <h1>give feedback</h1>
-      <Button handler={handleGood} text = {"good"}/>
-      <Button handler={handleNeutral} text = {"neutral"}/>
-      <Button handler={handleBad} text = {"bad"}/>
-      <Statistics
-        good={good}
-        neutral={neutral}
-        bad={bad}
-        total={total}
-        average={average}
-        percentage={percentage} 
-      />
+      {anecdotes[selected]}
+      <button onClick = {handleText}>
+        next anecdote
+      </button>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
