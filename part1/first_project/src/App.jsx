@@ -15,12 +15,16 @@ const Statistics = (props) => {
     return (
       <>
         <h1>statistics</h1>
-        <StatisticLine text={"good"} constant={props.good} />
-        <StatisticLine text={"neutral"} constant={props.neutral} />
-        <StatisticLine text={"bad"} constant={props.bad} />
-        <StatisticLine text={"all"} constant={props.total} />
-        <StatisticLine text={"average"} constant={props.average} />
-        <StatisticLine text={"positive"} constant={props.percentage} />
+        <table>
+          <tbody>
+            <StatisticLine text={"good"} constant={props.good} />
+            <StatisticLine text={"neutral"} constant={props.neutral} />
+            <StatisticLine text={"bad"} constant={props.bad} />
+            <StatisticLine text={"all"} constant={props.total} />
+            <StatisticLine text={"average"} constant={props.average} />
+            <StatisticLine text={"positive"} constant={props.percentage + "%"} />
+          </tbody>
+        </table>
       </>
     );
   } else {
@@ -32,11 +36,10 @@ const Statistics = (props) => {
 
 const StatisticLine = ({ text, constant }) => {
   return (
-    <>
-      <p>
-        {text} {constant}
-      </p>
-    </>
+      <tr>
+        <td>{text}</td> 
+        <td>{constant}</td>
+      </tr>
   );
 };
 
@@ -82,7 +85,7 @@ const App = () => {
         bad={bad}
         total={total}
         average={average}
-        percentage={percentage}
+        percentage={percentage} 
       />
     </div>
   );
